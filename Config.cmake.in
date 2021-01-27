@@ -3,6 +3,6 @@
 include(CMakeFindDependencyMacro)
 find_dependency(MPI)
 
-set(system_mpi_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
+set(system_mpi_INCLUDE_DIRS "@CMAKE_INSTALL_PREFIX@/include")
 
 set(system_mpi_LIBRARIES system_mpi)
