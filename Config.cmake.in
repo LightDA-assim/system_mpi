@@ -2,3 +2,5 @@
 
 include(CMakeFindDependencyMacro)
 find_dependency(MPI)
+
+set(system_mpi_LIBRARIES system_mpi)
