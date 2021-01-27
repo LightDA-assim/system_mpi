@@ -17,6 +17,5 @@ configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.cmake.in
 
 install(FILES
           "${CMAKE_CURRENT_BINARY_DIR}/system_mpiConfig.cmake"
-          "${CMAKE_CURRENT_BINARY_DIR}/system_mpiConfigVersion.cmake"
         DESTINATION lib/cmake/system_mpi
 )
