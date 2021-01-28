@@ -1,8 +1,5 @@
 @PACKAGE_INIT@
 
-include(CMakeFindDependencyMacro)
-find_dependency(MPI)
+include("${CMAKE_CURRENT_LIST_DIR}/system_mpiTargets.cmake")
 
-set(system_mpi_INCLUDE_DIRS "@CMAKE_INSTALL_PREFIX@/include" "@CMAKE_INSTALL_PREFIX@/include/fortran_modules/${CMAKE_Fortran_COMPILER_ID}/${CMAKE_Fortran_COMPILER_VERSION}")
-
-set(system_mpi_LIBRARIES system_mpi)
+check_required_components(system_mpi)
