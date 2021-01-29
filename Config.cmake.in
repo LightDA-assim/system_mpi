@@ -2,6 +2,6 @@
 
 include("${CMAKE_CURRENT_LIST_DIR}/system_mpiTargets.cmake")
 
-include(UseMPI.cmake)
+include("${CMAKE_CURRENT_LIST_DIR}/UseMPI.cmake")
 
 check_required_components(system_mpi)
