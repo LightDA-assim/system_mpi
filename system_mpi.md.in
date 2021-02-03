@@ -7,6 +7,7 @@ output_dir: ${DOC_DIR}
 exclude_dir: ${PROJECT_BINARY_DIR}
              ${PROJ_DIR}/tests
 preprocessor: {!.PREPROCESSOR!}
+macro: FORD_DOC
 include: ${FORD_PROJECT_INCLUDES}
 ---
 
