@@ -11,7 +11,7 @@ macro: FORD_DOC
 include: ${FORD_PROJECT_INCLUDES}
 ---
 
-Currently MPI provides three different Fortran interfaces. This leads to a challenge when creating portable software that can support all three interfaces. The three interfaces can be described as follows:
+The MPI standard defines three different Fortran interfaces. This leads to a challenge when creating portable software that can support all three interfaces. The three interfaces can be described as follows:
 
 - A legacy interface, invoked with `include 'mpif.h'`. This interface is deprecated and produces lots of type mismatch errors on recent gfortran releases, but remains the only available option for some systems and compilers.
 - A Fortran 90 interface, invoked with `use mpi`.
