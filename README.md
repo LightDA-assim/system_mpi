@@ -1,0 +1,103 @@
+# system_mpi: Portable MPI interface for Fortran
+
+The MPI standard defines three different Fortran interfaces. This leads to a challenge when creating portable software that can support all three interfaces. The three interfaces can be described as follows:
+
+- A legacy interface, invoked with `include 'mpif.h'`. This interface is deprecated and produces lots of type mismatch errors on recent gfortran releases, but remains the only available option for some systems and compilers.
+- A Fortran 90 interface, invoked with `use mpi`.
+- A Fortran 2008 interface, invoked with `use mpi_f08`.
+
+`system_mpi` provides a proxy for the best-available linked MPI library.
+
+## Installation
+
+Build using CMake:
+
+``` bash
+mkdir build
+cd build
+cmake ..
+make
+make install
+```
+
+## Usage
+
+To use system_mpi, a program or library needs to be linked to the `system_mpi` library. For code built using CMake, this can be accomplished by loading system_mpi with `find_package(system_mpi)` and linking targets with `target_link_libraries`.
+
+In addition, the library needs to be linked to the same MPI library that was used to compile `system_mpi`. `system_mpi` includes a helper function `configure_mpi_target` that will link a target to the MPI library.
+
+For example, if you have a library called `my_library` compiled from `my_library.F90` and an executable called `my_executable` compiled from `my_executable.F90`, your CMakeLists.txt might look like the following:
+
+``` cmake
+cmake_minimum_required(VERSION 3.10)
+
+project(my_project)
+
+enable_language(Fortran)
+
+find_package(system_mpi)
+
+add_library(my_library SHARED my_library.F90)
+target_link_libraries(my_library PUBLIC system_mpi)
+configure_mpi_target(my_library)
+
+add_executable(my_executable program.F90)
+target_link_libraries(my_executable PRIVATE system_mpi)
+configure_mpi_target(my_executable)
+```
+
+### Calling MPI procedures
+
+Within the source code, add `use system_mpi` to the top of each module or procedure that calls MPI functions. At compile-time the compiler will select the best available Fortran interface, using the `mpi` or `mpi_f08` module as required.
+
+For the most part, the differences between the three interfaces consist of subtle differences in argument types. `system_mpi` provides the following preprocessor definitions that can be used to adapt to these type differences:
+
+<style>
+td, th { border: 1px solid grey; padding:5px }
+table { margin: 1em}
+</style>
+
+| Name             | Description               | mpi      | mpi_f08     |
+|------------------|---------------------------|----------|-------------|
+| MPI_COMM_TYPE    | Type of MPI communicators | integer  | MPI_Comm    |
+| MPI_STATUS_TYPE  | Type of MPI statuses      | integer  | MPI_Status  |
+| MPI_REQUEST_TYPE | Type of MPI requests      | integer  | MPI_Request |
+
+
+The above preprocessor directives can be used to produce portable code that works with all three MPI interfaces. When calling an MPI procedure that accepts an MPI communicator, status, or request, use the appropriate preprocessor directive in place of the type specified in the MPI documentation, and it will be replaced with the appropriate type before compilation.
+
+Here is an simple example that uses all three of the above preprocessor definitions:
+
+``` fortran
+program MPI_example
+
+  use system_mpi
+
+  MPI_COMM_TYPE::comm
+  MPI_REQUEST_TYPE::request
+  MPI_STATUS_TYPE::status
+  integer::ierr
+  integer::data=0
+
+  ! Initialize MPI
+  call MPI_Init(ierr)
+
+  ! Set the comm to MPI_COMM_WORLD
+  comm=MPI_COMM_WORLD
+
+  ! Broadcast the data variable to all processors (nonblocking)
+  call MPI_Ibcast(data,1,MPI_INTEGER,0,comm,request,ierr)
+
+  ! Wait for broadcast to complete
+  call MPI_Wait(request,status,ierr)
+
+  call MPI_Finalize(ierr)
+
+end program MPI_example
+```
+
+The function MPI_Waitall adds an additional complication because it accepts an array of MPI statuses whose dimensionality differs among the three MPI interfaces. `system_mpi` provides a portable wrapper procedure `system_mpi_waitall` that accepts a 1-D array of type `MPI_REQUEST_TYPE` and calls `MPI_Waitall` with the appropriate arguments.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
