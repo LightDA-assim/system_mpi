@@ -56,7 +56,7 @@ if ( NOT SKIP_DOC_GEN )
     set(PROJ_DIR "${PROJECT_SOURCE_DIR}")
     set(FORD_PROJECT_FILE "${CMAKE_CURRENT_BINARY_DIR}/system_mpi.md")
     set(MACRO_FLAG "")
-    string(REPLACE ";" "\ninclude:" FORD_PROJECT_INCLUDES "${MPI_Fortran_INCLUDE_DIRS};${PROJ_DIR}")
+    string(REPLACE ";" "\ninclude:" FORD_PROJECT_INCLUDES "${MPI_Fortran_INCLUDE_DIRS};${PROJ_DIR}/src")
 
     configure_file(system_mpi.md.in system_mpi.md)
 

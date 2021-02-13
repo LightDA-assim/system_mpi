@@ -1,7 +1,6 @@
 #include "mpi_types.h"
 
 module system_mpi
-#ifndef FORD_DOC
 #ifdef HAVE_MPI_F08_MODULE
   use mpi_f08
   implicit none
@@ -10,6 +9,7 @@ module system_mpi
   implicit none
 #else
   implicit none
+#ifndef FORD_DOC
   include 'mpif.h'
 #endif
 #endif

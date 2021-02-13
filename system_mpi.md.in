@@ -8,6 +8,7 @@ exclude_dir: ${PROJECT_BINARY_DIR}
              ${PROJ_DIR}/tests
 preprocessor: {!.PREPROCESSOR!}
 macro: FORD_DOC
+macro: HAVE_MPI_F90_MODULE
 include: ${FORD_PROJECT_INCLUDES}
 ---
 
