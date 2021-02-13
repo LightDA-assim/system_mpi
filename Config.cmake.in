@@ -5,3 +5,5 @@ include("${CMAKE_CURRENT_LIST_DIR}/system_mpiTargets.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/UseMPI.cmake")
 
 check_required_components(system_mpi)
+
+set(system_mpi_DOCDIR @CMAKE_INSTALL_PREFIX@/share/doc/system_mpi)
