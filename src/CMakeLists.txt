@@ -8,4 +8,7 @@ configure_mpi_target(system_mpi)
 target_include_directories(system_mpi INTERFACE
   $<INSTALL_INTERFACE:${Fortran_MODULE_DIRECTORY}>
   $<INSTALL_INTERFACE:include>)
-install(TARGETS system_mpi EXPORT system_mpi)
+install(TARGETS system_mpi
+  EXPORT system_mpi
+  LIBRARY DESTINATION lib ${CMAKE_INSTALL_LIBDIR}
+  PUBLIC_HEADER DESTINATION include ${CMAKE_INSTALL_INCLUDEDIR})

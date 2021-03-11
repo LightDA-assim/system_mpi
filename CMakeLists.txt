@@ -13,6 +13,14 @@ set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/${Fortran_MODULE_
 
 include(CMakePackageConfigHelpers)
 
+function(list_transform_prepend var prefix)
+    set(temp "")
+    foreach(f ${${var}})
+        list(APPEND temp "${prefix}${f}")
+    endforeach()
+    set(${var} "${temp}" PARENT_SCOPE)
+endfunction()
+
 add_subdirectory(src)
 
 # Add all targets to the build-tree export set
@@ -133,7 +141,7 @@ else()
 
   set(ALL_SOURCES src/system_mpi.F90 src/mpi_types.h)
 
-  list(TRANSFORM ALL_SOURCES PREPEND ${CMAKE_CURRENT_SOURCE_DIR}/)
+  list_transform_prepend(ALL_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/)
 
   add_custom_target(
     fprettify
