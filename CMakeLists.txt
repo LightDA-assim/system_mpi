@@ -120,7 +120,7 @@ if ( NOT SKIP_DOC_GEN )
     set ( INSTALL_API_DOCUMENTATION TRUE
       CACHE BOOL "Install FORD generated documentation?" )
     if ( INSTALL_API_DOCUMENTATION )
-      install ( DIRECTORY "${DOC_ROOT}/" TYPE DOC )
+      install ( DIRECTORY "${DOC_ROOT}/" DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/doc )
     else ()
 
       # FORD Not found
