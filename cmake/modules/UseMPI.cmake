@@ -1,3 +1,8 @@
+if(${CMAKE_VERSION} VERSION_LESS 3.9)
+  # Workaround for trailing whitespace error in linker flags for older CMake
+  cmake_policy(SET CMP0004 OLD NO_POLICY_SCOPE)
+endif()
+
 find_package(MPI REQUIRED)
 
 if(MPI_Fortran_HAVE_F90_MODULE)
