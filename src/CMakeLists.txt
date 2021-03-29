@@ -1,6 +1,6 @@
 set(SYSTEM_MPI_SOURCES system_mpi.F90)
 
-include(UseMPI)
+include(UseMPI NO_POLICY_SCOPE)
 
 add_library(system_mpi SHARED ${SYSTEM_MPI_SOURCES})
 set_target_properties(system_mpi PROPERTIES PUBLIC_HEADER mpi_types.h)

@@ -1,6 +1,6 @@
 if(${CMAKE_VERSION} VERSION_LESS 3.9)
   # Workaround for trailing whitespace error in linker flags for older CMake
-  cmake_policy(SET CMP0004 OLD NO_POLICY_SCOPE)
+  cmake_policy(SET CMP0004 OLD)
 endif()
 
 find_package(MPI REQUIRED)
