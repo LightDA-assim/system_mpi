@@ -5,6 +5,10 @@ endif()
 
 find_package(MPI REQUIRED)
 
+if(MPIEXEC AND NOT MPIEXEC_EXECUTABLE)
+  set(MPIEXEC_EXECUTABLE ${MPIEXEC})
+endif()
+
 if(MPI_Fortran_HAVE_F90_MODULE)
   add_definitions(-DHAVE_MPI_F90_MODULE)
 endif()
