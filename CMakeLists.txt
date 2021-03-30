@@ -4,6 +4,10 @@ project(system_mpi)
 
 enable_language(Fortran)
 
+# Prevent older CMake versions from setting include directories with -isystem,
+# which prevents gfortran from finding Fortran module files
+set(CMAKE_NO_SYSTEM_FROM_IMPORTED ON)
+
 find_package(MPI REQUIRED)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/modules/")
