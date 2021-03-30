@@ -7,7 +7,7 @@ set_target_properties(system_mpi PROPERTIES PUBLIC_HEADER mpi_types.h)
 if(TARGET MPI::MPI_Fortran)
   target_link_libraries(system_mpi PUBLIC MPI::MPI_Fortran)
 else()
-  configure_mpi_target(system_mpi)
+  configure_mpi_target(system_mpi PUBLIC)
 endif()
 target_include_directories(system_mpi INTERFACE
   $<INSTALL_INTERFACE:${Fortran_MODULE_DIRECTORY}>
