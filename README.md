@@ -101,3 +101,5 @@ The function MPI_Waitall adds an additional complication because it accepts an a
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+DISTRIBUTION A: Approved for public release, distribution is unlimited
