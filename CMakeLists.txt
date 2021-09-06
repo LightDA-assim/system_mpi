@@ -4,7 +4,9 @@ project(system_mpi)
 
 enable_language(Fortran)
 
-cmake_policy(SET CMP0074 NEW)
+if(NOT ${CMAKE_VERSION} VERSION_LESS 3.12)
+  cmake_policy(SET CMP0074 NEW)
+endif()
 
 # Prevent older CMake versions from setting include directories with -isystem,
 # which prevents gfortran from finding Fortran module files

@@ -3,7 +3,9 @@ if(${CMAKE_VERSION} VERSION_LESS 3.9)
   cmake_policy(SET CMP0004 OLD)
 endif()
 
-cmake_policy(SET CMP0074 NEW)
+if(NOT ${CMAKE_VERSION} VERSION_LESS 3.12)
+  cmake_policy(SET CMP0074 NEW)
+endif()
 
 find_package(MPI REQUIRED)
 
