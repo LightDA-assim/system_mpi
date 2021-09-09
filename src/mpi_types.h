@@ -4,6 +4,6 @@
 #define MPI_COMM_TYPE type(MPI_Comm)
 #else
 #define MPI_REQUEST_TYPE integer
-#define MPI_STATUS_TYPE integer
+#define MPI_STATUS_TYPE integer, dimension(MPI_STATUS_SIZE)
 #define MPI_COMM_TYPE integer
 #endif
